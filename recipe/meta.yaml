@@ -39,10 +39,11 @@ test:
   imports:
     - evidently
   source_files:
-    - tests/*.py
+    - tests
   requires:
     - pip
     - pytest
+    # To fix `from numba.np.ufunc import _internal SystemError: initialization of _internal failed without raising an exception`
     - numba >=0.57.0
   commands:
     - pip check
