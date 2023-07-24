@@ -43,6 +43,7 @@ test:
   requires:
     - pip
     - pytest
+    - numba >=0.57.0
   commands:
     - pip check
     - pytest tests -vv
