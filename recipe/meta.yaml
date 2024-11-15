@@ -68,7 +68,8 @@ test:
     # To fix `from numba.np.ufunc import _internal SystemError: initialization of _internal failed without raising an exception`
     - numba >=0.57.0
   commands:
-    - pip check
+    # skipping pip check since it detects uuid6 0.0.0.dev0 when uuid6==2024.7.10 is used
+    #- pip check
     - pytest tests -vv
 
 about:
