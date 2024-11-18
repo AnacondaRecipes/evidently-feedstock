@@ -56,6 +56,11 @@ requirements:
     - sentence-transformers >=2.7.0
     - chromadb >=0.4.0
 
+# missing pyspark
+{% set tests_to_ignore = "--ignore=tests/spark/metrics/test_data_drift.py" %}
+# missing chromadb
+{% set tests_to_ignore = "--ignore=tests/test_pydantic_aliases.py" %}
+
 test:
   imports:
     - evidently
@@ -65,12 +70,17 @@ test:
     - pip
     - pytest
     - ipython
+    - pytorch
+    - pillow>=10.3.0
+    - chromadb>=0.4.0
+    - setuptools <=65.5.1 # [py<312]
+    - setuptools ==68.2.2 # [py>=312]
     # To fix `from numba.np.ufunc import _internal SystemError: initialization of _internal failed without raising an exception`
     - numba >=0.57.0
   commands:
     # skipping pip check since it detects uuid6 0.0.0.dev0 when uuid6==2024.7.10 is used
     #- pip check
-    - pytest tests -vv
+    - pytest {{ tests_to_ignore }} tests -vv
 
 about:
   home: https://github.com/evidentlyai/evidently
