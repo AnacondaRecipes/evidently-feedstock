@@ -71,7 +71,7 @@ requirements:
 {% set tests_to_ignore = "--ignore=tests/test_setup.py" %}
 # missing pyspark
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/spark/metrics/test_data_drift.py" %}
-{% set tests_to_skip = "-k 'not (test_metric_result_fields_config or test_all_metrics_tested)'" %}
+{% set tests_to_skip = "test_metric_result_fields_config or test_all_metrics_tested" %}
 # missing chromadb
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/test_pydantic_aliases.py" %}
 # this test tests the import of every single python file inside the package
@@ -96,7 +96,7 @@ test:
   commands:
     # skipping pip check since it detects uuid6 0.0.0.dev0 when uuid6==2024.7.10 is used
     #- pip check
-    - pytest {{ tests_to_ignore }} {{ tests_to_skip }} tests -vv
+    - pytest {{ tests_to_ignore }} -k "not ({{ tests_to_skip }})" tests -vv
 
 about:
   home: https://github.com/evidentlyai/evidently
