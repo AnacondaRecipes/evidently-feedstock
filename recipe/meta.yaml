@@ -8,14 +8,22 @@ package:
 source:
   url: https://github.com/evidentlyai/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: c07a65a5c07138708328dbdf1e2b369f725039f714efb393b5631db7b57fa393
+  patches:
+    - 0001-patch-test-to-exclude-experimental-features.patch
 
 build:
   number: 0
   # umap-learn isn't available on s390x
   skip: True  # [py<37 or s390x]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+    # removing experimental features that are dependent on missing chromadb
+    - rm -rf $SP_DIR/evidently/experimental
 
 requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
     - pip
     - python
