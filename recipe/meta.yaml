@@ -67,7 +67,7 @@ requirements:
 # we don't include setup.py in the package
 {% set tests_to_ignore = "--ignore=tests/test_setup.py" %}
 # missing pyspark
-{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/spark/metrics/test_data_drift.py" %}
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/spark/metrics/test_data_drift.py" %}
 # missing chromadb
 {% set tests_to_ignore = tests_to_ignore + "--ignore=tests/test_pydantic_aliases.py" %}
 
