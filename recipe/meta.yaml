@@ -19,6 +19,8 @@ build:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
     # removing experimental features that are dependent on missing chromadb
     - rm -rf $SP_DIR/evidently/experimental
+    # removing BERTScore feature since it depends on missing transformers
+    - rm -rf src/evidently/features/BERTScore_feature.py src/evidently/descriptors/BERTScore_descriptor.py
 
 requirements:
   build:
@@ -60,8 +62,9 @@ requirements:
   run_constrained:
     - openai >=1.16.2
     - evaluate >=0.4.1
-    - transformers >=4.39.3
     - sentence-transformers >=2.7.0
+    # transformers would be optional but it is included in BERTScore_descriptor.py
+    - transformers >=4.39.3
     - chromadb >=0.4.0
 
 # we don't include setup.py in the package
@@ -73,6 +76,8 @@ requirements:
 # this test tests the import of every single python file inside the package
 # seems pretty unnecessary, it also breaks because of RecursionError: maximum recursion depth exceeded
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/test_pydantic_compat.py" %}
+# do not test BERTscore feature since it depends on optional transformers
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/features/test_bertscore_feature.py" %}
 
 test:
   imports:
