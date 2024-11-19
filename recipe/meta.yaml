@@ -56,10 +56,12 @@ requirements:
     - sentence-transformers >=2.7.0
     - chromadb >=0.4.0
 
+# we don't include setup.py in the package
+{% set tests_to_ignore = "--ignore=tests/test_setup.py" %}
 # missing pyspark
-{% set tests_to_ignore = "--ignore=tests/spark/metrics/test_data_drift.py" %}
+{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/spark/metrics/test_data_drift.py" %}
 # missing chromadb
-{% set tests_to_ignore = "--ignore=tests/test_pydantic_aliases.py" %}
+{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/test_pydantic_aliases.py" %}
 
 test:
   imports:
@@ -72,7 +74,6 @@ test:
     - ipython
     - pytorch
     - pillow>=10.3.0
-    - chromadb>=0.4.0
     - setuptools <=65.5.1 # [py<312]
     - setuptools ==68.2.2 # [py>=312]
     # To fix `from numba.np.ufunc import _internal SystemError: initialization of _internal failed without raising an exception`
