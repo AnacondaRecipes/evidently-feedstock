@@ -114,3 +114,5 @@ about:
 extra:
   recipe-maintainers:
     - thewchan
+  skip-lints:
+    - missing_pip_check
