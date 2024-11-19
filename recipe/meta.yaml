@@ -15,6 +15,8 @@ build:
   number: 0
   # umap-learn isn't available on s390x
   skip: True  # [py<37 or s390x]
+  # missing dynaconf for py312
+  skip: True  # [py>311]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
     # removing experimental features that are dependent on missing chromadb
