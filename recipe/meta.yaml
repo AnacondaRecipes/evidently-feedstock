@@ -60,6 +60,7 @@ requirements:
     - cryptography >=43.0.1
     # transformers would be optional but it is included in BERTScore_descriptor.py
     - transformers >=4.39.3
+    - mkl {{ mkl }}  # [blas_impl == "mkl" and osx and x86_64]
   # from https://github.com/evidentlyai/evidently/blob/cd6cbfba3f0c0ebdb7494e53941d954272f451fa/requirements.min.txt#L30
   run_constrained:
     - openai >=1.16.2
