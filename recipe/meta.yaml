@@ -73,6 +73,8 @@ requirements:
     # because of [fsspec]
     - s3fs >=2024.9.0
     - gcsfs >=2024.9.0
+    # because of pandas[parquet]
+    - pyarrow >=10.0.1
 
 # we don't include setup.py in the package
 {% set tests_to_ignore = "--ignore=tests/test_setup.py" %}
