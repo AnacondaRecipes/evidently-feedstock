@@ -19,8 +19,6 @@ build:
   skip: True  # [py>311]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-    # removing experimental features that are dependent on missing chromadb
-    - rm -rf $SP_DIR/evidently/experimental
 
 requirements:
   build:
