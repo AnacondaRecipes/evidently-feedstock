@@ -56,15 +56,23 @@ requirements:
     - deprecation >=2.1.0
     - uuid6 >=2024.7.10
     - cryptography >=43.0.1
-    # transformers would be optional but it is included in BERTScore_descriptor.py
-    - transformers >=4.39.3
   # from https://github.com/evidentlyai/evidently/blob/cd6cbfba3f0c0ebdb7494e53941d954272f451fa/requirements.min.txt#L30
   run_constrained:
+    # because of [llm]
     - openai >=1.16.2
     - evaluate >=0.4.1
     - sentence-transformers >=2.7.0
     - chromadb >=0.4.0
     - blas=*=openblas  # [osx and x86_64]
+    # transformers is included in BERTScore_descriptor.py and is added as a test dependency
+    - transformers >=4.39.3
+    # because of transformers[torch]
+    - accelerate >=0.26.0
+    # because of [spark]
+    - pyspark >=3.4.0
+    # because of [fsspec]
+    - s3fs >=2024.9.0
+    - gcsfs >=2024.9.0
 
 # we don't include setup.py in the package
 {% set tests_to_ignore = "--ignore=tests/test_setup.py" %}
@@ -92,6 +100,7 @@ test:
     - setuptools ==68.2.2 # [py>=312]
     # To fix `from numba.np.ufunc import _internal SystemError: initialization of _internal failed without raising an exception`
     - numba >=0.57.0
+    - transformers >=4.39.3
   commands:
     # skipping pip check since it detects uuid6 0.0.0.dev0 when uuid6==2024.7.10 is used
     #- pip check
