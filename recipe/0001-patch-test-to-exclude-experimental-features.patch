@@ -1,0 +1,42 @@
+From 91e0440ffc68e877ac1a81ea3a339ad26341e44f Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Tue, 19 Nov 2024 12:30:40 +0100
+Subject: [PATCH] patch test to exclude experimental features
+
+---
+ tests/test_pydantic_aliases.py | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/tests/test_pydantic_aliases.py b/tests/test_pydantic_aliases.py
+index 0cd96d92..b38b68e0 100644
+--- a/tests/test_pydantic_aliases.py
++++ b/tests/test_pydantic_aliases.py
+@@ -16,9 +16,9 @@ from evidently.base_metric import Metric
+ from evidently.base_metric import MetricResult
+ from evidently.collector.config import CollectorTrigger
+ from evidently.collector.storage import CollectorStorage
+-from evidently.experimental.dataset_generators.base import BaseDatasetGenerator
+-from evidently.experimental.dataset_generators.llm.index import DataCollectionProvider
+-from evidently.experimental.dataset_generators.llm.splitter import Splitter
++# from evidently.experimental.dataset_generators.base import BaseDatasetGenerator
++# from evidently.experimental.dataset_generators.llm.index import DataCollectionProvider
++# from evidently.experimental.dataset_generators.llm.splitter import Splitter
+ from evidently.features.generated_features import BaseDescriptor
+ from evidently.features.generated_features import GeneratedFeatures
+ from evidently.features.llm_judge import BaseLLMPromptTemplate
+@@ -110,9 +110,9 @@ def test_all_aliases_correct():
+         CollectorStorage: "collector_storage",
+         BaseLLMPromptTemplate: "prompt_template",
+         DashboardPanel: "dashboard_panel",
+-        BaseDatasetGenerator: "dataset_generator",
+-        Splitter: "splitter",
+-        DataCollectionProvider: "data_collecton_provider",
++        # BaseDatasetGenerator: "dataset_generator",
++        # Splitter: "splitter",
++        # DataCollectionProvider: "data_collecton_provider",
+         PromptBlock: "prompt_block",
+         PromptTemplate: "prompt_template",
+     }
+-- 
+2.39.5 (Apple Git-154)
+
