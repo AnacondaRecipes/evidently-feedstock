@@ -19,6 +19,8 @@ build:
   skip: True  # [py>311]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  entry_points:
+    - evidently=evidently.cli:app
 
 requirements:
   build:
