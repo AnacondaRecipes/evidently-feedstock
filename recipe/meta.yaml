@@ -102,8 +102,6 @@ test:
     - pillow>=10.3.0
     - setuptools <=65.5.1 # [py<312]
     - setuptools ==68.2.2 # [py>=312]
-    # To fix `from numba.np.ufunc import _internal SystemError: initialization of _internal failed without raising an exception`
-    - numba >=0.57.0
     - transformers >=4.39.3
   commands:
     # skipping pip check since it detects uuid6 0.0.0.dev0 when uuid6==2024.7.10 is used
