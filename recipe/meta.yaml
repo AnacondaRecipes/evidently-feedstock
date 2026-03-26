@@ -83,6 +83,7 @@ test:
     - pip
     - pytest
     - pytest-asyncio
+    - pytest-timeout
   commands:
     - pip check
     - evidently --help
