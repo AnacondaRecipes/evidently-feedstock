@@ -14,7 +14,7 @@ build:
   skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
-    - evidently=evidently.legacy.cli:app
+    - evidently=evidently.cli:app
 
 requirements:
   host:
@@ -61,6 +61,11 @@ requirements:
     - pyspark >=3.4.0,<4
     - s3fs >=2024.9.0
     - gcsfs >=2024.9.0
+    - litellm >=1.74.3
+    - llama-index >=0.10
+    - faiss-cpu >=1.8.0
+    - alembic >=1.13.0
+    - psycopg2 >=2.9.0
     - sqlalchemy >=2.0.0
 
 test:
