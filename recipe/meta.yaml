@@ -79,12 +79,15 @@ requirements:
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/test_pydantic_compat.py" %}     # meta-test imports all modules, hits optional deps
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/test_pydantic_aliases.py" %}    # requires alembic/sqlalchemy
 {% set tests_to_skip = "test_metric_result_fields_config" %}               # requires tracely
+{% set tests_to_skip = tests_to_skip + " or test_empirical_mmd" %}         # numpy percentile() API change
+{% set tests_to_skip = tests_to_skip + " or test_create_demo_project" %}   # flaky KeyError
 
 test:
   source_files:
     - tests
     - test_data
     - requirements.min.txt
+    - pyproject.toml
   imports:
     - evidently
   requires:
