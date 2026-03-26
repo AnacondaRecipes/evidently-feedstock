@@ -69,14 +69,24 @@ requirements:
     - psycopg2 >=2.9.0
     - sqlalchemy >=2.0.0
 
+{% set tests_to_ignore = "--ignore=tests/spark" %}                          # requires pyspark
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/test_torch_numpy.py" %}  # requires pytorch
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/future/test_ui" %}       # requires sqlalchemy
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/ui/test_tracing_storage.py" %}  # requires sqlalchemy
+
 test:
+  source_files:
+    - tests
   imports:
     - evidently
   requires:
     - pip
+    - pytest
+    - pytest-asyncio
   commands:
     - pip check
     - evidently --help
+    - pytest tests/ {{ tests_to_ignore }} -x -v --timeout=300
 
 about:
   home: https://github.com/evidentlyai/evidently
