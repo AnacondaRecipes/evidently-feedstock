@@ -86,6 +86,7 @@ test:
     - pytest-asyncio
     - pytest-timeout
     - pyarrow
+    - pillow
   commands:
     - pip check
     - evidently --help
