@@ -74,6 +74,9 @@ requirements:
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/future/test_ui" %}       # requires sqlalchemy
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/ui/test_tracing_storage.py" %}  # requires sqlalchemy
 {% set tests_to_ignore = tests_to_ignore + " --ignore=tests/collector/test_app.py" %}      # flaky async litestar TestClient test
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/features/test_bertscore_feature.py" %}  # requires transformers
+{% set tests_to_ignore = tests_to_ignore + " --ignore=tests/features/test_is_valid_sql_feature.py" %}  # requires sqlvalidator
+{% set tests_to_skip = "test_metric_result_fields_config" %}               # requires tracely
 
 test:
   source_files:
@@ -86,12 +89,14 @@ test:
     - pytest
     - pytest-asyncio
     - pytest-timeout
+    - pytest-mock
     - pyarrow
     - pillow
+    - ipython
   commands:
     - pip check
     - evidently --help
-    - pytest tests/ {{ tests_to_ignore }} -v --timeout=300
+    - pytest tests/ {{ tests_to_ignore }} -v --timeout=300 -k "not ({{ tests_to_skip }})"
 
 about:
   home: https://github.com/evidentlyai/evidently
