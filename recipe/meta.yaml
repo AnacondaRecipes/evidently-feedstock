@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f13c415d749dd73825bd1ec485136eaf9261b3794d765d2844718b7ffe167998
+  url: https://github.com/evidentlyai/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 9f18fe8f6bf86309faa4cb5df0f79d703be492b08bdbf38e8d8ad292cd9c71af
 
 build:
   number: 0
